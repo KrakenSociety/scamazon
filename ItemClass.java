@@ -8,6 +8,7 @@
  */
 public abstract class ItemClass {
     private double Price;
+    private String Seller;
     private String Isbn;
     private String Description;
     private String Category;
@@ -23,6 +24,14 @@ public abstract class ItemClass {
     
     public void setPrice(double newPrice){
         Price = newPrice;
+    }
+    
+    public String getSeller(){
+        return Seller;
+    }
+    
+    public void setSeller(String newSeller){
+        Seller = newSeller;
     }
     
     public String getIsbn(){
