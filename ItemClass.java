@@ -7,12 +7,13 @@
  * @author Kyle Beckley
  */
 public abstract class ItemClass {
-    private double Price;
-    private String Seller;
-    private String Isbn;
-    private String Description;
-    private String Category;
-    private int    Rating;
+    private double  Price;
+    private String  Seller;
+    private String  Isbn;
+    private String  Description;
+    private String  Category;
+    private int     Rating;
+    private boolean Stock;          //false means out of stock
     
     public ItemClass(){
         
@@ -64,5 +65,13 @@ public abstract class ItemClass {
     
     public void setRating(int newRating){
         Rating = newRating;
+    }
+    
+    public boolean getStock(){
+        return Stock;
+    }
+    
+    public void setStock(boolean newStock){
+        Stock = newStock;
     }
 }
