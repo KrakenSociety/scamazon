@@ -7,6 +7,7 @@
  * @author Kyle Beckley
  */
 public abstract class ItemClass {
+    private String  ItemName;
     private double  Price;
     private String  Seller;
     private String  Isbn;
@@ -17,6 +18,14 @@ public abstract class ItemClass {
     
     public ItemClass(){
         
+    }
+    
+    public void setItemName(String newItemName){
+        ItemName = newItemName;
+    }
+    
+    public String getItemName(){
+        return ItemName;
     }
     
     public double getPrice(){
