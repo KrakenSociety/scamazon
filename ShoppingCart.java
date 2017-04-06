@@ -5,17 +5,17 @@
  */
 package scamazon;
 
-
+import java.util.ArrayList;
 /**
- *
  * @author Kody Martens
  */
-import java.util.*;
+
 public class ShoppingCart {
     
-    //shoppingList is a vector housing the customers items that they are interested in buying
-    public Vector<ItemClass> shoppingList = new Vector<ItemClass>(0, 5);
+    public ShoppingCart(){}
     
+    ArrayList<ItemClass> shoppingList = new ArrayList<>();
+
     //totalPrice is the total sum of the item cost in the shoppingList
     public double totalPrice = 0.0;
     
@@ -26,20 +26,30 @@ public class ShoppingCart {
     //in the shopping cart
     public double calcTotalPrice(){
         for(int i = 0; i < shoppingList.size(); ++i){
-            totalPrice += shoppingList[i].getPrice();
+            totalPrice += shoppingList.get(i).getPrice();
         }
         salesTax *= totalPrice; //calculate sales tax
         totalPrice += salesTax; //add sales tax to the totalPrice
+        return totalPrice;
     }
     
+    /**
+     *
+     * @param item
+     */
     public void addItem(ItemClass item){
-        shoppingList.addElement(item);
+        shoppingList.add(item);
     }
     
+    /**
+     *
+     * @param item
+     */
     public void removeItem(ItemClass item){
         for(int i = 0; i < shoppingList.size(); ++i){
-            if (item.getItemName() == shoppingList[i].getItemName()){
-                shoppingList.removeElementAt(i);
+            if (item.getItemName().equals(shoppingList.get(i).getItemName())){
+                shoppingList.remove(i);
+            } else {
             }
         }
         shoppingList.trimToSize();
