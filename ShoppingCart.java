@@ -49,7 +49,6 @@ public class ShoppingCart {
         for(int i = 0; i < shoppingList.size(); ++i){
             if (item.getItemName().equals(shoppingList.get(i).getItemName())){
                 shoppingList.remove(i);
-            } else {
             }
         }
         shoppingList.trimToSize();
