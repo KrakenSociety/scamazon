@@ -15,6 +15,8 @@ public class User {
     private String password;
     private double balance;
     //private String contactInfo // depends on how we implement chat-base system
+    private String email;
+    public ShoppingCart cart;
     
     public String getUsername(){
         return username;
@@ -49,5 +51,13 @@ public class User {
     
     public double subFromBalance(double value){
         return balance -= value;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
+    }
+    
+    public String getEmail(){
+        return email;
     }
 }
