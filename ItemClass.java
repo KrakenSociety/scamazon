@@ -1,14 +1,10 @@
 /*
  *
  */
-package scamazon
+
+import java.sql.*;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.postgresql.copy.CopyManager;
@@ -95,50 +91,30 @@ public abstract class ItemClass {
         Stock = newStock;
     }
     
-    public File_to_Database(string FileName){
-        Connection con = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        FileReader fr = null;
-
-        String url = 
-        String user = 
-        String password = 
-
+    public void File_to_Database(String FileName){
+        
+        String dbName, userName, userPassword, serverIP;
+        dbName="item database";  //your database name.  In class, you have one same as your login id
+        userName="kyle.beckley";  // your login id to the database
+        userPassword = "50392569";  //your password to database (not the machine)
+        serverIP="147.97.156.236";
+        
         try {
-
-            con = DriverManager.getConnection(url, user, password);
-           
+            // Step 1: Allocate a database 'Connection' object
+            Connection con = DriverManager.getConnection(
+                "jdbc:postgresql://"+serverIP+"/"+dbName, userName, userPassword);
+                //"jdbc:postgresql://hostname:port/databaseName", "username", "password"
+ 
             CopyManager cm = new CopyManager((BaseConnection) con);
-
-            fr = new FileReader();
-            cm.copyIn("COPY items FROM STDIN WITH DELIMITER '/n'", fr);
             
+            FileReader fr = new FileReader(FileName);
+            cm.copyIn("COPY item FROM STDIN WITH DELIMITER '|'", fr);
+           
         } catch (SQLException | IOException ex) {
-            Logger lgr = Logger.getLogger(CopyFrom.class.getName());
+            Logger lgr = Logger.getLogger(ItemClass.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
-
-        } finally {
-
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-                if (fr != null) {
-                    fr.close();
-                }
-
-            } catch (SQLException | IOException ex) {
-                Logger lgr = Logger.getLogger(CopyFrom.class.getName());
-                lgr.log(Level.WARNING, ex.getMessage(), ex);
-            }
         }
+        // Step 5: Close the resources - Done automatically by try-with-resources
     }
     
     public void All_to_Database(int max){
@@ -150,3 +126,4 @@ public abstract class ItemClass {
         }
     }
 }
+
