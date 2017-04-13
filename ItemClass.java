@@ -1,19 +1,13 @@
 /*
  *
  */
+package Scamazon;
 
-import java.sql.*;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.postgresql.copy.CopyManager;
-import org.postgresql.core.BaseConnection;
 /**
  *
  * @author Kyle Beckley
  */
-public abstract class ItemClass {
+public class ItemClass {
     private String  ItemName;
     private double  Price;
     private String  Seller;
@@ -91,39 +85,7 @@ public abstract class ItemClass {
         Stock = newStock;
     }
     
-    public void File_to_Database(String FileName){
-        
-        String dbName, userName, userPassword, serverIP;
-        dbName="item database";  //your database name.  In class, you have one same as your login id
-        userName="kyle.beckley";  // your login id to the database
-        userPassword = "50392569";  //your password to database (not the machine)
-        serverIP="147.97.156.236";
-        
-        try {
-            // Step 1: Allocate a database 'Connection' object
-            Connection con = DriverManager.getConnection(
-                "jdbc:postgresql://"+serverIP+"/"+dbName, userName, userPassword);
-                //"jdbc:postgresql://hostname:port/databaseName", "username", "password"
- 
-            CopyManager cm = new CopyManager((BaseConnection) con);
-            
-            FileReader fr = new FileReader(FileName);
-            cm.copyIn("COPY item FROM STDIN WITH DELIMITER '|'", fr);
-           
-        } catch (SQLException | IOException ex) {
-            Logger lgr = Logger.getLogger(ItemClass.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        // Step 5: Close the resources - Done automatically by try-with-resources
-    }
     
-    public void All_to_Database(int max){
-        int j = 1;
-        for (int i = 0; i < max; i++){
-            String fileName = "item" + j;
-            File_to_Database(fileName);
-            j++;
-        }
-    }
 }
 
+   
