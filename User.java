@@ -13,6 +13,7 @@ public class User {
     
     private String username;
     private String password;
+    private String customerID;
     private double balance;
     //private String contactInfo // depends on how we implement chat-base system
     private String email;
@@ -26,6 +27,10 @@ public class User {
         return password;
     }
     
+    protected String getID(){
+        return customerID;
+    }
+    
     public double getBalance(){
         return balance;
     }
@@ -37,6 +42,10 @@ public class User {
     
     protected void setPassword(String newPass){
         password = newPass;
+    }
+    
+    protected void setID(String id){
+        customerID = id;
     }
     
     public void setBalance(double newBalance){
