@@ -48,8 +48,10 @@ public class SQLMethods {
         int j = 1;
         for (int i = 0; i < max; i++){
             String fileName = "item" + j;
-            File_to_Database(fileName);
-            WriteImage(fileName);
+            String txt = fileName + ".txt";
+            String img = fileName + ".jpeg";
+            File_to_Database(txt);
+            WriteImage(img);
             j++;
         }
     }
