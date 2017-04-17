@@ -15,7 +15,7 @@ public class ItemClass {
     private String  Description;
     private String  Category;
     private int     Rating;
-    private boolean Stock;          //false means out of stock
+    private int     Stock;          //false means out of stock
     
     public ItemClass(){
         
