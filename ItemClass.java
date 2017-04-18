@@ -15,10 +15,21 @@ public class ItemClass {
     private String  Description;
     private String  Category;
     private int     Rating;
-    private int     Stock;          //false means out of stock
+    private int Stock;          //false means out of stock
     
     public ItemClass(){
         
+    }
+    
+    public void print (){
+        System.out.println(getItemName());
+        System.out.println(getPrice());
+        System.out.println(getSeller());
+        System.out.println(getIsbn());
+        System.out.println(getDescription());
+        System.out.println(getCategory());
+        System.out.println(getRating());
+        System.out.println(getStock());   
     }
     
     public void setItemName(String newItemName){
@@ -77,11 +88,11 @@ public class ItemClass {
         Rating = newRating;
     }
     
-    public boolean getStock(){
+    public int getStock(){
         return Stock;
     }
     
-    public void setStock(boolean newStock){
+    public void setStock(int newStock){
         Stock = newStock;
     }
     
