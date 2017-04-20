@@ -6,6 +6,7 @@
 package scamazon;
 
 import java.util.ArrayList;
+import java.util.*;
 /**
  * @author Kody Martens
  */
@@ -15,18 +16,19 @@ public class ShoppingCart {
     public ShoppingCart(){}
     
     ArrayList<ItemClass> shoppingList = new ArrayList<>();
-
+    ArrayList<Integer> quantity = new ArrayList<>();
     //totalPrice is the total sum of the item cost in the shoppingList
     public double totalPrice = 0.0;
     
     //salesTax is the tax that we are going to charge them
     public double salesTax = 0.1;
     
+    
     //calcTotalPrice is a function that sums up the total price of the items
     //in the shopping cart
     public double calcTotalPrice(){
         for(int i = 0; i < shoppingList.size(); ++i){
-            totalPrice += shoppingList.get(i).getPrice();
+            totalPrice += shoppingList.get(i).getPrice() * quantity.get(i);
         }
         salesTax *= totalPrice; //calculate sales tax
         totalPrice += salesTax; //add sales tax to the totalPrice
@@ -38,7 +40,22 @@ public class ShoppingCart {
      * @param item
      */
     public void addItem(ItemClass item){
-        shoppingList.add(item);
+        //if you add a duplicate item to the shoppingcart
+        //list, the quantity increments rather than the length
+        //of the list
+        for (int i = 0; i < shoppingList.size(); ++i){
+            if (item.getItemName().equals(shoppingList.get(i).getItemName())){
+                quantity.set(i, quantity.get(i)+1);
+            }
+            else{ //no duplicate value
+                shoppingList.add(item);//appending unique item to the list
+                quantity.add(1);//creating a quantity of 1
+            }
+        }
+        if (shoppingList.isEmpty()){
+            shoppingList.add(item);//adding to an empty list
+            quantity.add(1);//creating a quantity of 1
+        }
     }
     
     /**
@@ -48,13 +65,21 @@ public class ShoppingCart {
     public void removeItem(ItemClass item){
         for(int i = 0; i < shoppingList.size(); ++i){
             if (item.getItemName().equals(shoppingList.get(i).getItemName())){
-                shoppingList.remove(i);
+                if (quantity.get(i) > 1){
+                    quantity.set(i, quantity.get(i)-1);
+                }
+                else{
+                    shoppingList.remove(i);
+                    quantity.remove(i);
+                }
             }
         }
         shoppingList.trimToSize();
+        quantity.trimToSize();
     }
     
     public void clearCart(){
         shoppingList.clear();
+        quantity.clear();
     }
 }
