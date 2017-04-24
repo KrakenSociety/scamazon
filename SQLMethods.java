@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scamazon;
+
 
 import java.io.*;
 import java.sql.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
+import java.sql.DriverManager;
+import java.util.Scanner;
+
+
 
 /**
  *
@@ -56,9 +61,10 @@ public class SQLMethods {
             j++;
         }
     }
+    
 
-    public void Retrieve (ItemClass item){
-        String dbName, userName, userPassword, serverIP;
+    public void Retrieve (ItemClass ItemArray[]){
+       /* String dbName, userName, userPassword, serverIP;
         dbName="kyle.beckley";  //your database name.  In class, you have one same as your login id
         userName="kyle.beckley";  // your login id to the database
         userPassword = "apple";  //your password to database (not the machine)
@@ -69,7 +75,9 @@ public class SQLMethods {
             Connection con = DriverManager.getConnection(
                 "jdbc:postgresql://"+serverIP+"/"+dbName, userName, userPassword);
                 //"jdbc:postgresql://hostname:port/databaseName", "username", "password"
-
+            // con.setLoginTimeout(30);
+            DriverManager.setLoginTimeout(60);
+            
             PreparedStatement pst = con.prepareStatement("SELECT * FROM item");
             ResultSet rs = pst.executeQuery();
 
@@ -89,6 +97,14 @@ public class SQLMethods {
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
         }
         // Step 5: Close the resources - Done automatically by try-with-resources
+        */
+       int j = 1;
+        for (int i = 0; i < Globals.MAX; i++){
+            String fileName = "item" + j;
+            String txt = fileName + ".txt";
+            ItemArray [i] = Read(txt);
+            j++;
+        }
     }
 
     public void WriteImage(String FileName){
@@ -150,5 +166,71 @@ public class SQLMethods {
         }
     }
 
+    public ItemClass Read (String FileName){
+        ItemClass temp = new ItemClass();
+        try{
+            Scanner read = new Scanner (new File(FileName));
+            read.useDelimiter("|");
 
+            while (read.hasNext()){
+                temp.setItemName(read.next());
+                String a = read.next();
+                int b = Integer.parseInt(a);
+                temp.setPrice(b);
+                temp.setSeller(read.next());
+                temp.setIsbn(read.next());
+                temp.setDescription(read.next());
+                temp.setCategory(read.next());
+                a = read.next();
+                b = Integer.parseInt(a);
+                temp.setRating(b);
+                 a = read.next();
+                b = Integer.parseInt(a);
+                temp.setStock(b);
+                read.close();
+            }
+        }
+        catch (IOException ex) {
+            Logger lgr = Logger.getLogger(ItemClass.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return temp;
+    }
+ 
+    public void SearchCategory (String Category, int max, ItemClass ItemArray[], ItemClass VariableCategoryArray[]){
+    int k = 0;
+    for(int i = 0; i < max; i++){
+        if(ItemArray[i].getCategory().equalsIgnoreCase(Category)){
+            VariableCategoryArray[k] = ItemArray[i];
+        }
+    }
 }
+
+public void Search(String Searchword, int max, ItemClass [] ItemArray, ItemClass [] VariableCategoryArray){
+    int k = 0;
+    ItemClass temp = new ItemClass();
+    for(int i = 0; i < max; i++){
+        if((ItemArray[i].getCategory()).equalsIgnoreCase("Electronics")){
+            temp = ItemArray[i];
+            VariableCategoryArray[k] = temp;
+            
+        }
+        else{
+            char[] charArray = Searchword.toCharArray();
+            int len = charArray.length;
+            char[] charArray2 = ItemArray[i].getItemName().toCharArray();
+            int H = 0;
+            for(int t = 0; t < len; t++){
+                if(charArray[t] == charArray2[t]){
+                    H++;
+                }
+            }
+            if(H >= 3){
+                VariableCategoryArray[k] = ItemArray[i];
+            }
+        }
+    }
+}
+}
+    
+
