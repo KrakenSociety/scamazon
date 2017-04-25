@@ -13,10 +13,15 @@ import java.util.*;
 
 public class ShoppingCart {
     
-    public ShoppingCart(){}
     
     ArrayList<ItemClass> shoppingList = new ArrayList<>();
     ArrayList<Integer> quantity = new ArrayList<>();
+    
+    public ShoppingCart(ItemClass item){
+        addItem(item);
+    }
+    
+
     //totalPrice is the total sum of the item cost in the shoppingList
     public double totalPrice = 0.0;
     
