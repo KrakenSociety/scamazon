@@ -14,6 +14,7 @@ import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
 import java.sql.DriverManager;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 
@@ -63,7 +64,7 @@ public class SQLMethods {
     }
     
 
-    public void Retrieve (ItemClass ItemArray[]){
+    public void Retrieve (ArrayList<ItemClass> ItemArray){
        /* String dbName, userName, userPassword, serverIP;
         dbName="kyle.beckley";  //your database name.  In class, you have one same as your login id
         userName="kyle.beckley";  // your login id to the database
@@ -102,7 +103,7 @@ public class SQLMethods {
         for (int i = 0; i < Globals.MAX; i++){
             String fileName = "src/item" + j;
             String txt = fileName + ".txt";
-            ItemArray [i] = Read(txt);
+            ItemArray.set(0,Read(txt));
             j++;
         }
     }
@@ -199,28 +200,29 @@ public class SQLMethods {
         return temp;
     }
  
-    public void SearchCategory (String Category, int max, ItemClass ItemArray[], ItemClass VariableCategoryArray[]){
+    public void SearchCategory (String Category,ArrayList<ItemClass> ItemArray, ArrayList<ItemClass> VariableCategoryArray){
     int k = 0;
-    for(int i = 0; i < max; i++){
-        if(ItemArray[i].getCategory().equalsIgnoreCase(Category)){
-            VariableCategoryArray[k] = ItemArray[i];
+    for(int i = 0; i < Globals.MAX; i++){
+        if(ItemArray.get(i).getCategory().equalsIgnoreCase(Category)){
+            VariableCategoryArray.set(k,ItemArray.get(i));
+            k++;
         }
     }
 }
 
-public void Search(String Searchword, int max, ItemClass [] ItemArray, ItemClass [] VariableCategoryArray){
+public void Search(String Searchword, ArrayList<ItemClass> ItemArray, ArrayList<ItemClass> VariableCategoryArray){
     int k = 0;
     ItemClass temp = new ItemClass();
-    for(int i = 0; i < max; i++){
-        if((ItemArray[i].getCategory()).equalsIgnoreCase("Electronics")){
-            temp = ItemArray[i];
-            VariableCategoryArray[k] = temp;
-            
+    for(int i = 0; i < Globals.MAX; i++){
+        if((ItemArray.get(i).getCategory()).equalsIgnoreCase("Electronics")){
+            temp = ItemArray.get(i);
+            VariableCategoryArray.set(k,temp);
+            k++;
         }
         else{
             char[] charArray = Searchword.toCharArray();
             int len = charArray.length;
-            char[] charArray2 = ItemArray[i].getItemName().toCharArray();
+            char[] charArray2 = ItemArray.get(i).getItemName().toCharArray();
             int H = 0;
             for(int t = 0; t < len; t++){
                 if(charArray[t] == charArray2[t]){
@@ -228,7 +230,7 @@ public void Search(String Searchword, int max, ItemClass [] ItemArray, ItemClass
                 }
             }
             if(H >= 3){
-                VariableCategoryArray[k] = ItemArray[i];
+                VariableCategoryArray.set(k, ItemArray.get(i));
             }
         }
     }
