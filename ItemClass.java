@@ -95,7 +95,18 @@ public class ItemClass {
     public void setStock(int newStock){
         Stock = newStock;
     }
-    
+        public String displayItem(){
+        String entireItem =
+        "Item Name: " + getItemName() + "\n" +
+        "Price: $" + getPrice() + "\n" +
+        "Seller: " + getSeller() + "\n" +
+        "ISBN: " + getIsbn() + "\n" +
+        "Disc: " + getDescription() + "\n" +
+        "Category: " + getCategory() + "\n" +
+        "Rating: " + getRating() + "\n" +
+        "Remaining Stock: " + getStock();
+        return entireItem;
+    }
     
 }
 
