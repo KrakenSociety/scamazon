@@ -1,7 +1,7 @@
 /*
  *
  */
-
+package scamazon;
 
 /**
  *
@@ -15,7 +15,7 @@ public class ItemClass {
     private String  Description;
     private String  Category;
     private int     Rating;
-    private int Stock;          //false means out of stock
+    private int     Stock;          //false means out of stock
     
     public ItemClass(){
         
@@ -96,6 +96,18 @@ public class ItemClass {
         Stock = newStock;
     }
     
+    public String displayItem(){
+        String entireItem =
+        "Item Name: " + getItemName() + "\n" +
+        "Price: $" + getPrice() + "\n" +
+        "Seller: " + getSeller() + "\n" +
+        "ISBN: " + getIsbn() + "\n" +
+        "Disc: " + getDescription() + "\n" +
+        "Category: " + getCategory() + "\n" +
+        "Rating: " + getRating() + "\n" +
+        "Remaining Stock: " + getStock();
+        return entireItem;
+    }
     
 }
 

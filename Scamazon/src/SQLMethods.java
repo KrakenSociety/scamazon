@@ -1,3 +1,5 @@
+package scamazon;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,7 +16,6 @@ import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
 import java.sql.DriverManager;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 
@@ -64,7 +65,7 @@ public class SQLMethods {
     }
     
 
-    public void Retrieve (ArrayList<ItemClass> ItemArray){
+    public void Retrieve (ItemClass ItemArray[]){
        /* String dbName, userName, userPassword, serverIP;
         dbName="kyle.beckley";  //your database name.  In class, you have one same as your login id
         userName="kyle.beckley";  // your login id to the database
@@ -99,11 +100,12 @@ public class SQLMethods {
         }
         // Step 5: Close the resources - Done automatically by try-with-resources
         */
+
        int j = 1;
         for (int i = 0; i < Globals.MAX; i++){
-            String fileName = "src/item" + j;
+            String fileName = "C:\\Users\\L\\Documents\\NetBeansProjects\\scamazon\\src\\scamazon\\item" + j;
             String txt = fileName + ".txt";
-            ItemArray.set(0,Read(txt));
+            ItemArray [i] = Read(txt);
             j++;
         }
     }
@@ -170,59 +172,99 @@ public class SQLMethods {
     public ItemClass Read (String FileName){
         ItemClass temp = new ItemClass();
         try{
-            Scanner read = new Scanner (new File(FileName));
+            String filename = FileName;
+            Scanner read = new Scanner (new File(filename));
             read.useDelimiter("\n");
-            
-            
-                temp.setItemName(read.next());//string name
+
+                temp.setItemName(read.next());
+
                 String a = read.next();
-                double c = Double.parseDouble(a);
-                temp.setPrice(c);               //double price
-                temp.setSeller(read.next());    //string seller
-                temp.setIsbn(read.next());      //string isbn
-                temp.setDescription(read.next());//string description 
-                temp.setCategory(read.next());  // string category
-                int b;
-                String z = read.next();
-                System.out.print(z);
-                b = Integer.parseInt(z);
-                temp.setRating(b);              //int rating
-                 a = read.next();
-                b = Integer.parseInt(a);
-                temp.setStock(b);               //int stock
+                double b = Double.parseDouble(a);
+                temp.setPrice(b);
+                temp.setSeller(read.next());
+                temp.setIsbn(read.next());
+                temp.setDescription(read.next());
+                temp.setCategory(read.next());
+
+                //String a2 = read.next();
+                //int c = Integer.parseInt(a2);
+
+                //temp.setRating(c);
+                //a3 = read.next();
+                //c = Integer.parseInt(a3);
+                //temp.setStock(c);
                 read.close();
-            
         }
-        catch (IOException | NumberFormatException ex) {
+        catch (IOException ex) {
             Logger lgr = Logger.getLogger(ItemClass.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return temp;
     }
- 
-    public void SearchCategory (String Category,ArrayList<ItemClass> ItemArray, ArrayList<ItemClass> VariableCategoryArray){
+    
+        public void RetrieveUser (User UserArray[]){
+            int j = 1;
+            for (int i = 0; i < Globals.MAX; i++){
+                String fileName = "C:\\Users\\L\\Documents\\NetBeansProjects\\scamazon\\src\\scamazon\\user" + j;
+                String txt = fileName + ".txt";
+                UserArray [i] = ReadUser(txt);
+                j++;
+            }
+        }
+
+    public User ReadUser (String FileName){
+        User temp = new User();
+        try{
+            String filename = FileName;
+            Scanner read = new Scanner (new File(filename));
+            read.useDelimiter("\n");
+
+                temp.setUsername(read.next());
+                temp.setPassword(read.next());
+                temp.setID(read.next());
+                String a = read.next();
+                double c = Double.parseDouble(a);
+                temp.setBalance(c);
+                temp.setEmail(read.next());
+
+                //String a2 = read.next();
+                //int c = Integer.parseInt(a2);
+
+                //temp.setRating(c);
+                //a3 = read.next();
+                //c = Integer.parseInt(a3);
+                //temp.setStock(c);
+                read.close();
+        }
+        catch (IOException ex) {
+            Logger lgr = Logger.getLogger(User.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return temp;
+    }        
+        
+    public void SearchCategory (String Category, int max, ItemClass ItemArray[], ItemClass VariableCategoryArray[]){
     int k = 0;
-    for(int i = 0; i < Globals.MAX; i++){
-        if(ItemArray.get(i).getCategory().equalsIgnoreCase(Category)){
-            VariableCategoryArray.set(k,ItemArray.get(i));
-            k++;
+    for(int i = 0; i < max; i++){
+        if(ItemArray[i].getCategory().equalsIgnoreCase(Category)){
+            VariableCategoryArray[k] = ItemArray[i];
         }
     }
 }
 
-public void Search(String Searchword, ArrayList<ItemClass> ItemArray, ArrayList<ItemClass> VariableCategoryArray){
+public void Search(String Searchword, int max, ItemClass [] ItemArray, ItemClass [] VariableCategoryArray){
     int k = 0;
     ItemClass temp = new ItemClass();
-    for(int i = 0; i < Globals.MAX; i++){
-        if((ItemArray.get(i).getCategory()).equalsIgnoreCase("Electronics")){
-            temp = ItemArray.get(i);
-            VariableCategoryArray.set(k,temp);
-            k++;
+    for(int i = 0; i < max; i++){
+        if((ItemArray[i].getCategory()).equalsIgnoreCase("Electronics")){
+            temp = ItemArray[i];
+            VariableCategoryArray[k] = temp;
+            
         }
         else{
             char[] charArray = Searchword.toCharArray();
             int len = charArray.length;
-            char[] charArray2 = ItemArray.get(i).getItemName().toCharArray();
+            char[] charArray2 = ItemArray[i].getItemName().toCharArray();
             int H = 0;
             for(int t = 0; t < len; t++){
                 if(charArray[t] == charArray2[t]){
@@ -230,7 +272,7 @@ public void Search(String Searchword, ArrayList<ItemClass> ItemArray, ArrayList<
                 }
             }
             if(H >= 3){
-                VariableCategoryArray.set(k, ItemArray.get(i));
+                VariableCategoryArray[k] = ItemArray[i];
             }
         }
     }
