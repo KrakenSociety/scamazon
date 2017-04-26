@@ -1,3 +1,5 @@
+package scamazon;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -98,9 +100,10 @@ public class SQLMethods {
         }
         // Step 5: Close the resources - Done automatically by try-with-resources
         */
+
        int j = 1;
         for (int i = 0; i < Globals.MAX; i++){
-            String fileName = "item" + j;
+            String fileName = "C:\\Users\\L\\Documents\\NetBeansProjects\\scamazon\\src\\scamazon\\item" + j;
             String txt = fileName + ".txt";
             ItemArray [i] = Read(txt);
             j++;
@@ -169,26 +172,28 @@ public class SQLMethods {
     public ItemClass Read (String FileName){
         ItemClass temp = new ItemClass();
         try{
-            Scanner read = new Scanner (new File(FileName));
-            read.useDelimiter("|");
+            String filename = FileName;
+            Scanner read = new Scanner (new File(filename));
+            read.useDelimiter("\n");
 
-            while (read.hasNext()){
                 temp.setItemName(read.next());
+
                 String a = read.next();
-                int b = Integer.parseInt(a);
+                double b = Double.parseDouble(a);
                 temp.setPrice(b);
                 temp.setSeller(read.next());
                 temp.setIsbn(read.next());
                 temp.setDescription(read.next());
                 temp.setCategory(read.next());
-                a = read.next();
-                b = Integer.parseInt(a);
-                temp.setRating(b);
-                 a = read.next();
-                b = Integer.parseInt(a);
-                temp.setStock(b);
+
+                //String a2 = read.next();
+                //int c = Integer.parseInt(a2);
+
+                //temp.setRating(c);
+                //a3 = read.next();
+                //c = Integer.parseInt(a3);
+                //temp.setStock(c);
                 read.close();
-            }
         }
         catch (IOException ex) {
             Logger lgr = Logger.getLogger(ItemClass.class.getName());
@@ -196,7 +201,48 @@ public class SQLMethods {
         }
         return temp;
     }
- 
+    
+        public void RetrieveUser (User UserArray[]){
+            int j = 1;
+            for (int i = 0; i < Globals.MAX; i++){
+                String fileName = "C:\\Users\\L\\Documents\\NetBeansProjects\\scamazon\\src\\scamazon\\user" + j;
+                String txt = fileName + ".txt";
+                UserArray [i] = ReadUser(txt);
+                j++;
+            }
+        }
+
+    public User ReadUser (String FileName){
+        User temp = new User();
+        try{
+            String filename = FileName;
+            Scanner read = new Scanner (new File(filename));
+            read.useDelimiter("\n");
+
+                temp.setUsername(read.next());
+                temp.setPassword(read.next());
+                temp.setID(read.next());
+                String a = read.next();
+                double c = Double.parseDouble(a);
+                temp.setBalance(c);
+                temp.setEmail(read.next());
+
+                //String a2 = read.next();
+                //int c = Integer.parseInt(a2);
+
+                //temp.setRating(c);
+                //a3 = read.next();
+                //c = Integer.parseInt(a3);
+                //temp.setStock(c);
+                read.close();
+        }
+        catch (IOException ex) {
+            Logger lgr = Logger.getLogger(User.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return temp;
+    }        
+        
     public void SearchCategory (String Category, int max, ItemClass ItemArray[], ItemClass VariableCategoryArray[]){
     int k = 0;
     for(int i = 0; i < max; i++){
