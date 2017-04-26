@@ -43,9 +43,11 @@ public class ScamazonUI extends javax.swing.JFrame  {
 //        item1.setCategory("test");
 //        item1.setRating(5);
 //        item1.setStock(9);
-        
+        jTextArea1.setText(ItemArray[0].displayItem());
         System.out.println(ItemArray[0].displayItem());
-        
+        jTextArea2.setText(ItemArray[1].displayItem());
+        jTextArea3.setText(ItemArray[2].displayItem());
+        jTextArea4.setText(ItemArray[3].displayItem());
         
 //        System.out.println(ItemArray[1].getItemName());
 //        System.out.println(ItemArray[1].getPrice());
@@ -116,9 +118,14 @@ public class ScamazonUI extends javax.swing.JFrame  {
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        GetDataButton = new javax.swing.JButton();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         MyAccountButton = new javax.swing.JButton();
 
@@ -432,43 +439,50 @@ public class ScamazonUI extends javax.swing.JFrame  {
 
         jLabel3.setText("jLabel3");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextArea2MouseClicked(evt);
+                jTextArea1MouseClicked(evt);
             }
         });
-        jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextArea2KeyPressed(evt);
+                jTextArea1KeyPressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTextArea2);
-
-        GetDataButton.setText("Get Data");
-        GetDataButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GetDataButtonActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jTextArea1);
 
         jLabel4.setText("jLabel4");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane4.setViewportView(jTextArea3);
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane5.setViewportView(jTextArea4);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(GetDataButton))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addComponent(jScrollPane4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -478,10 +492,14 @@ public class ScamazonUI extends javax.swing.JFrame  {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3))
                         .addGap(18, 18, 18)
-                        .addComponent(GetDataButton)
-                        .addGap(231, 231, 231)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4))
+                        .addGap(87, 87, 87)
                         .addComponent(jLabel4)))
                 .addContainerGap(1568, Short.MAX_VALUE))
         );
@@ -491,19 +509,22 @@ public class ScamazonUI extends javax.swing.JFrame  {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SearchDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SearchDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(SearchDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jButton2.setText("Create a listing");
@@ -615,8 +636,8 @@ public class ScamazonUI extends javax.swing.JFrame  {
         item1.setCategory("test");
         item1.setRating(5);
         item1.setStock(9);
-        System.out.println(item1.getItemName());
-        jTextArea2.setText(item1.displayItem());
+        //System.out.println(item1.getItemName());
+        jTextArea1.setText(item1.displayItem());
 // TODO add your handling code here:
     }//GEN-LAST:event_searchbarActionPerformed
 
@@ -674,11 +695,7 @@ public class ScamazonUI extends javax.swing.JFrame  {
 // TODO add your handling code here:
     }//GEN-LAST:event_MyAccountButtonActionPerformed
 
-    private void GetDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetDataButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GetDataButtonActionPerformed
-
-    private void jTextArea2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea2MouseClicked
+    private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
         ItemClass item1 = new ItemClass();
         item1.setItemName("something");
         item1.setPrice(6.50);
@@ -688,13 +705,13 @@ public class ScamazonUI extends javax.swing.JFrame  {
         item1.setCategory("test");
         item1.setRating(5);
         item1.setStock(9);
-        System.out.println(item1.getItemName());
-        jTextArea2.setText(item1.getItemName());
-    }//GEN-LAST:event_jTextArea2MouseClicked
+        //System.out.println(item1.getItemName());
+        jTextArea1.setText(item1.getItemName());
+    }//GEN-LAST:event_jTextArea1MouseClicked
 
-    private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
+    private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextArea2KeyPressed
+    }//GEN-LAST:event_jTextArea1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -702,7 +719,6 @@ public class ScamazonUI extends javax.swing.JFrame  {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton GetDataButton;
     private javax.swing.JButton MyAccountButton;
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchDisplay;
@@ -745,8 +761,14 @@ public class ScamazonUI extends javax.swing.JFrame  {
     private javax.swing.JPopupMenu jPopupMenu9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea2;
+    private static javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JTextArea jTextArea2;
+    private static javax.swing.JTextArea jTextArea3;
+    private static javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
