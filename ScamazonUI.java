@@ -31,8 +31,8 @@ public class ScamazonUI extends javax.swing.JFrame  {
         ItemClass [] ItemArray;
         ItemArray = new ItemClass [Globals.MAX];
         A.Retrieve(ItemArray);
-        
-        ItemClass item1 = new ItemClass();
+        ShoppingCart cart = new ShoppingCart();
+
 
         
 //        item1.setItemName("something");
@@ -43,6 +43,7 @@ public class ScamazonUI extends javax.swing.JFrame  {
 //        item1.setCategory("test");
 //        item1.setRating(5);
 //        item1.setStock(9);
+
         jTextArea1.setText(ItemArray[0].displayItem());
         System.out.println(ItemArray[0].displayItem());
         jTextArea2.setText(ItemArray[1].displayItem());
@@ -285,6 +286,8 @@ public class ScamazonUI extends javax.swing.JFrame  {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/scamazon/tattered-american-flag.jpg"))); // NOI18N
 
         jTextPane1.setEditable(false);
         jTextPane1.setBorder(null);
@@ -624,25 +627,39 @@ public class ScamazonUI extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbarActionPerformed
-      //SearchPage sp = new SearchPage();
-      //sp.setVisible(true);
-        SearchDisplay.setText("Searched: " + searchbar.getText());
-        ItemClass item1 = new ItemClass();
-        item1.setItemName("something");
-        item1.setPrice(6.50);
-        item1.setSeller("Me");
-        item1.setIsbn("1234");
-        item1.setDescription("test item...");
-        item1.setCategory("test");
-        item1.setRating(5);
-        item1.setStock(9);
-        //System.out.println(item1.getItemName());
-        jTextArea1.setText(item1.displayItem());
+        //SearchPage sp = new SearchPage();
+        //sp.setVisible(true);
+        SQLMethods A = new SQLMethods();
+        ItemClass [] ItemArray;
+        ItemArray = new ItemClass [Globals.MAX];
+        A.Retrieve(ItemArray);
+
+//        for(int i = 0; i < Globals.MAX; i++){
+//            String category = ItemArray[i].getCategory();
+//            System.out.println(category);
+//            System.out.println(searchbar.getText());
+//            if(!searchbar.getText().equalsIgnoreCase(category) ) {
+//                jTextArea1.setText(ItemArray[i].displayItem());
+//            } else {
+//            }
+//        }
+      
+
+        jTextArea1.setText(ItemArray[0].displayItem());
+        jTextArea2.setText(ItemArray[1].displayItem());
+        jTextArea3.setText("");
+        jTextArea4.setText("");
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_searchbarActionPerformed
 
     private void motorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorsButtonActionPerformed
         SearchDisplay.setText("Searched: MOTORS");
+        
+        jTextArea1.setText("");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea4.setText("");
 // TODO add your handling code here:
     }//GEN-LAST:event_motorsButtonActionPerformed
 
@@ -652,7 +669,23 @@ public class ScamazonUI extends javax.swing.JFrame  {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void elecButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elecButtonActionPerformed
-        SearchDisplay.setText("Searched: ELECTRONICS");        
+        SQLMethods A = new SQLMethods();
+        ItemClass [] ItemArray;
+        ItemArray = new ItemClass [Globals.MAX];
+        A.Retrieve(ItemArray);
+        
+        SearchDisplay.setText("Searched: ELECTRONICS");   
+        for(int i = 0; i < Globals.MAX; i++){
+            String category = ItemArray[i].getCategory();
+            System.out.println(category);
+            if(new String("Electronics").equalsIgnoreCase(category) ) {
+                jTextArea1.setText(ItemArray[i].displayItem());
+            }
+        }
+        jTextArea1.setText(ItemArray[1].displayItem());
+        jTextArea2.setText(ItemArray[0].displayItem());
+        jTextArea3.setText("");
+        jTextArea4.setText("");
 // TODO add your handling code here:
     }//GEN-LAST:event_elecButtonActionPerformed
 
@@ -670,6 +703,11 @@ public class ScamazonUI extends javax.swing.JFrame  {
 
     private void musicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_musicButtonActionPerformed
         SearchDisplay.setText("Searched: MUSIC");
+        
+        jTextArea1.setText("");
+        jTextArea2.setText("");
+        jTextArea3.setText("");
+        jTextArea4.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_musicButtonActionPerformed
 
@@ -681,6 +719,16 @@ public class ScamazonUI extends javax.swing.JFrame  {
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
       SearchDisplay.setText("");
+      
+        SQLMethods A = new SQLMethods();
+        ItemClass [] ItemArray;
+        ItemArray = new ItemClass [Globals.MAX];
+        A.Retrieve(ItemArray);
+        jTextArea1.setText(ItemArray[0].displayItem());
+        System.out.println(ItemArray[0].displayItem());
+        jTextArea2.setText(ItemArray[1].displayItem());
+        jTextArea3.setText(ItemArray[2].displayItem());
+        jTextArea4.setText(ItemArray[3].displayItem());
         // TODO add your handling code here:
     }//GEN-LAST:event_homeButtonActionPerformed
 
@@ -696,17 +744,7 @@ public class ScamazonUI extends javax.swing.JFrame  {
     }//GEN-LAST:event_MyAccountButtonActionPerformed
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
-        ItemClass item1 = new ItemClass();
-        item1.setItemName("something");
-        item1.setPrice(6.50);
-        item1.setSeller("Me");
-        item1.setIsbn("1234");
-        item1.setDescription("test item...");
-        item1.setCategory("test");
-        item1.setRating(5);
-        item1.setStock(9);
-        //System.out.println(item1.getItemName());
-        jTextArea1.setText(item1.getItemName());
+
     }//GEN-LAST:event_jTextArea1MouseClicked
 
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
